@@ -1,12 +1,45 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
 import { getUserIds } from "./common.mjs";
 
-window.onload = function () {
+const state = {
+  selectedUser: null,
+}
+
+function populateUserSelector() {
+  const userSelect = document.getElementById("user-select");
   const users = getUserIds();
-  document.querySelector("main").innerText = `There are ${users.length} users`;
+  users.forEach(user => {
+    const option = document.createElement("option");
+    option.value = user;
+    option.textContent = `User ${user}`;
+    userSelect.appendChild(option);
+  });
+}
+
+function setupEventListeners() {
+  const userSelect = document.getElementById("user-select");
+  userSelect.addEventListener("change", handleUserChange);
+}
+
+function handleUserChange(event) {
+  state.selectedUser = event.target.value;
+  renderApp();
+}
+
+function renderApp() {
+  const app = document.getElementById("app");
+  app.innerHTML = ""; // Clear previous content
+
+  if (!state.selectedUser) {
+    app.textContent = "Please select a user to view their spaced repetition schedule.";
+    return;
+  } else {
+    app.textContent = `Displaying spaced repetition schedule for user: ${state.selectedUser}`;
+    // Here you would add code to fetch and display the user's schedule
+  }
+} 
+
+window.onload = function () {
+  populateUserSelector();
+  setupEventListeners();
+  renderApp();
 };
