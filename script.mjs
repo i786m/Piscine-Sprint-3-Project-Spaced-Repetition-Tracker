@@ -2,6 +2,7 @@ import {
 	getUserIds,
 	getReviewDates,
 	getSortedReviewTopicsForUser,
+	getTopicsReadyToDisplayForUser,
 } from './common.mjs';
 import { getData, addData, clearData } from './storage.mjs';
 
@@ -63,19 +64,7 @@ function displayTopicsForUser(userId) {
 	headerRow.appendChild(topicHeader);
 	headerRow.appendChild(dateHeader);
 	reviewTable.appendChild(headerRow);
-	const reviewTopics = getSortedReviewTopicsForUser(userId);
-  const todayUTC = new Date(
-		Date.UTC(
-			new Date().getUTCFullYear(),
-			new Date().getUTCMonth(),
-			new Date().getUTCDate(),
-		),
-  )
-		.toISOString()
-		.split('T')[0];
-	const topicsToDisplay = reviewTopics.filter((topic) => {
-		return topic.reviewDate >= todayUTC;
-	});
+	const topicsToDisplay = getTopicsReadyToDisplayForUser(userId);
 	topicsToDisplay.forEach(({ topic, reviewDate }) => {
 		const row = document.createElement('tr');
 		const topicCell = document.createElement('td');
