@@ -188,3 +188,6 @@ tr:nth-child(even) td {
 	border: 0;
 }
 
+#review-container{
+    padding-bottom: 2rem;
+}
