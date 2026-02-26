@@ -23,7 +23,6 @@ function populateUserSelector() {
 function setupEventListeners() {
 	const userSelect = document.getElementById('user-select');
 	userSelect.addEventListener('change', handleUserChange);
-
 	const formContainer = document.getElementById('form-container');
 	formContainer.addEventListener('submit', handleAddTopic);
 }
@@ -127,7 +126,12 @@ function handleAddTopic(event) {
 	event.preventDefault();
 	const userId = state.selectedUser;
 	if (!userId) {
-		alert('Please select a user before adding a topic.');
+		showNotification('Please select a user before adding a topic.', true);
+		return;
+	}
+	const topicName = event.target[0].value.trim();
+	if (!topicName) {
+		showNotification('Please enter a topic name.', true);
 		return;
 	}
 	const topicName = event.target['topic-input'].value;
@@ -138,9 +142,26 @@ function handleAddTopic(event) {
 		reviewDate: date,
 	}));
 	addData(state.selectedUser, newTopics);
+  showNotification(`Topic "${topicName}" added successfully with review dates.`);
 	renderSchedule();
 	event.target.reset();
 	event.target['date-input'].value = new Date().toISOString().split('T')[0];
+}
+
+function showNotification(message, error = false, duration = 3000) {
+	const notificationContainer = document.getElementById(
+		'notification-container',
+	);
+	notificationContainer.textContent = message;
+	notificationContainer.style.display = 'block';
+	notificationContainer.style.backgroundColor = error ? '#b80000' : '#008000';
+	notificationContainer.style.opacity = '1';
+	setTimeout(() => {
+		notificationContainer.style.opacity = '0';
+		setTimeout(() => {
+			notificationContainer.style.display = 'none';
+		}, 300);
+	}, duration);
 }
 
 function setup() {
