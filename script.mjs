@@ -24,6 +24,9 @@ function populateUserSelector() {
 function setupEventListeners() {
 	const userSelect = document.getElementById('user-select');
 	userSelect.addEventListener('change', handleUserChange);
+
+  const formContainer = document.getElementById('form-container');
+  formContainer.addEventListener('submit', handleAddTopic);
 }
 
 function handleUserChange(event) {
@@ -32,24 +35,23 @@ function handleUserChange(event) {
 }
 
 function renderSchedule() {
-	const mainContent = document.getElementById('main-content');
-	mainContent.innerHTML = '';
+	const scheduleContainer = document.getElementById('schedule-container');
+	scheduleContainer.innerHTML = '';
 	if (!state.selectedUser) {
-		mainContent.textContent =
+		scheduleContainer.textContent =
 			'Please select a user to view their spaced repetition schedule.';
 	} else {
-		mainContent.textContent = `Displaying spaced repetition schedule for user: ${state.selectedUser}`;
+		scheduleContainer.textContent = `Displaying spaced repetition schedule for User ${state.selectedUser}`;
 		const reviewContainer = document.createElement('div');
 		reviewContainer.id = 'review-container';
-		mainContent.appendChild(reviewContainer);
-		const topics = getData(state.selectedUser);
+		scheduleContainer.appendChild(reviewContainer);
+		const topics = getTopicsReadyToDisplayForUser(state.selectedUser);
 		if (topics && topics.length > 0) {
 			displayTopicsForUser(state.selectedUser);
 		} else {
 			reviewContainer.textContent =
 				' No topics found. Please add a topic to get started.';
 		}
-		addTopicsForm();
 	}
 }
 
@@ -78,8 +80,8 @@ function displayTopicsForUser(userId) {
 	reviewContainer.appendChild(reviewTable);
 }
 
-function addTopicsForm() {
-	const mainContent = document.getElementById('main-content');
+function renderTopicsForm() {
+	const formContainer = document.getElementById('form-container');
 	const form = document.createElement('form');
 	form.id = 'add-topic-form';
 	const input = document.createElement('input');
@@ -96,12 +98,16 @@ function addTopicsForm() {
 	form.appendChild(input);
 	form.appendChild(dateInput);
 	form.appendChild(submitButton);
-	form.addEventListener('submit', handleAddTopic);
-	mainContent.appendChild(form);
+	formContainer.appendChild(form);
 }
 
 function handleAddTopic(event) {
 	event.preventDefault();
+  const userId = state.selectedUser;
+  if (!userId) {
+    alert('Please select a user before adding a topic.');
+    return;
+  }
 	const topicName = event.target[0].value;
 	const reviewStartDate = event.target[1].value;
 	const reviewDates = getReviewDates(reviewStartDate);
@@ -112,9 +118,14 @@ function handleAddTopic(event) {
 	addData(state.selectedUser, newTopics);
 	renderSchedule();
 	event.target.reset();
+  event.target[1].value = new Date().toISOString().split('T')[0];
 }
 
-window.onload = function () {
-	populateUserSelector();
-	setupEventListeners();
-};
+function setup() {
+  populateUserSelector();
+  setupEventListeners();
+  renderTopicsForm();
+  renderSchedule();
+}
+
+window.onload = setup;
