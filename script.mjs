@@ -116,7 +116,7 @@ function renderTopicsForm() {
 	buttonGroup.className = 'form-group';
 	const submitButton = document.createElement('button');
 	submitButton.type = 'submit';
-	submitButton.textContent = 'Add Topic';
+	submitButton.textContent = 'Add Topic And Review Dates';
 	buttonGroup.appendChild(submitButton);
 	form.appendChild(topicGroup);
 	form.appendChild(dateGroup);
