@@ -1,10 +1,9 @@
 import {
 	getUserIds,
 	getReviewDates,
-	getSortedReviewTopicsForUser,
 	getTopicsReadyToDisplayForUser,
 } from './common.mjs';
-import { getData, addData, clearData } from './storage.mjs';
+import { addData } from './storage.mjs';
 
 const state = {
 	selectedUser: null,
@@ -131,8 +130,8 @@ function handleAddTopic(event) {
 		alert('Please select a user before adding a topic.');
 		return;
 	}
-	const topicName = event.target[0].value;
-	const reviewStartDate = event.target[1].value;
+	const topicName = event.target['topic-input'].value;
+	const reviewStartDate = event.target['date-input'].value;
 	const reviewDates = getReviewDates(reviewStartDate);
 	const newTopics = reviewDates.map((date) => ({
 		topic: topicName,
@@ -141,7 +140,7 @@ function handleAddTopic(event) {
 	addData(state.selectedUser, newTopics);
 	renderSchedule();
 	event.target.reset();
-	event.target[1].value = new Date().toISOString().split('T')[0];
+	event.target['date-input'].value = new Date().toISOString().split('T')[0];
 }
 
 function setup() {
