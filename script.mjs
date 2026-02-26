@@ -37,6 +37,9 @@ function handleUserChange(event) {
 function renderSchedule() {
 	const scheduleContainer = document.getElementById('schedule-container');
 	scheduleContainer.innerHTML = '';
+	const formContainer = document.getElementById('form-container');
+	formContainer.innerHTML = '';
+	renderTopicsForm();
 	if (!state.selectedUser) {
 		scheduleContainer.textContent =
 			'Please select a user to view their spaced repetition schedule.';
@@ -84,6 +87,8 @@ function renderTopicsForm() {
 	const formContainer = document.getElementById('form-container');
 	const form = document.createElement('form');
 	form.id = 'add-topic-form';
+	const topicGroup = document.createElement('div');
+	topicGroup.className = 'form-group';
 	const topicLabel = document.createElement('label');
 	topicLabel.htmlFor = 'topic-input';
 	topicLabel.textContent = 'Topic name:';
@@ -93,6 +98,10 @@ function renderTopicsForm() {
 	input.placeholder = 'Enter topic name';
 	input.required = true;
 	input.autocomplete = 'off';
+	topicGroup.appendChild(topicLabel);
+	topicGroup.appendChild(input);
+	const dateGroup = document.createElement('div');
+	dateGroup.className = 'form-group';
 	const dateLabel = document.createElement('label');
 	dateLabel.htmlFor = 'date-input';
 	dateLabel.textContent = 'Review start date:';
@@ -101,14 +110,17 @@ function renderTopicsForm() {
 	dateInput.id = 'date-input';
 	dateInput.required = true;
 	dateInput.value = new Date().toISOString().split('T')[0];
+	dateGroup.appendChild(dateLabel);
+	dateGroup.appendChild(dateInput);
+	const buttonGroup = document.createElement('div');
+	buttonGroup.className = 'form-group';
 	const submitButton = document.createElement('button');
 	submitButton.type = 'submit';
 	submitButton.textContent = 'Add Topic';
-	form.appendChild(topicLabel);
-	form.appendChild(input);
-	form.appendChild(dateLabel);
-	form.appendChild(dateInput);
-	form.appendChild(submitButton);
+	buttonGroup.appendChild(submitButton);
+	form.appendChild(topicGroup);
+	form.appendChild(dateGroup);
+	form.appendChild(buttonGroup);
 	formContainer.appendChild(form);
 }
 

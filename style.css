@@ -1,23 +1,187 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+#form-container {
+	margin-bottom: 2rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	display: flex;
+	justify-content: center;
+	width: 100%;
 }
 
-header{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+form#add-topic-form {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	align-items: flex-end;
+	width: 100%;
+	max-width: 900px;
+	justify-content: stretch;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 0;
+	min-width: 250px;
+	max-width: 100%;
+	justify-content: stretch;
+}
+
+.form-group input {
+	width: 100%;
+	box-sizing: border-box;
+	min-width: 200px;
+	font-size: 1.1rem;
+	padding: 0.75rem 1rem;
+	height: 48px;
+}
+.form-group button {
+	width: 100%;
+	min-width: 80px;
+	max-width: 200px;
+	box-sizing: border-box;
+	height: 48px;
+	padding: 0;
+}
+
+.form-group label {
+	margin-bottom: 0.25rem;
+	font-weight: bold;
+}
+select#user-select {
+	padding: 0.6rem 1rem;
+	font-size: 1.1rem;
+	border: 2px solid #2d6cdf;
+	border-radius: 4px;
+	background: #fff;
+	margin: 0 auto 1rem auto;
+	min-width: 180px;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+select#user-select:focus {
+	outline: 2px solid #2d6cdf;
+	outline-offset: 2px;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background: #f7f9fa;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+}
+
+header {
+	background: #2d6cdf;
+	color: #fff;
+	padding: 1rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+h1 {
+	margin: 0 auto;
+	font-size: 2rem;
+	flex: 1;
+	text-align: center;
+}
+
+#main-content {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	box-sizing: border-box;
+	background: #fff;
+	padding: 0 2rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+label {
+	font-weight: bold;
+}
+
+input[type='text'],
+input[type='date'] {
+	padding: 0.5rem;
+	font-size: 1rem;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+}
+
+input:focus,
+button:focus {
+	outline: 2px solid #2d6cdf;
+	outline-offset: 2px;
+}
+
+button[type='submit'] {
+	background: #2d6cdf;
+	color: #fff;
+	border: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: 4px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+button[type='submit']:hover,
+button[type='submit']:focus {
+	background: #1a4fa0;
+}
+
+#schedule-container {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1.5rem;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #2d6cdf;
+	border-radius: 8px;
+}
+
+th,
+td {
+	padding: 0.75rem;
+	border-bottom: 1px solid #2d6cdf;
+	border-right: 1px solid #2d6cdf;
+	text-align: center;
+}
+
+th {
+	background: #2d6cdf;
+	color: #fff;
+	border-top: 2px solid #2d6cdf;
+}
+
+tr:nth-child(even) td {
+	background: #b8c7d5;
 }
 
 .screen-reader-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
 }
