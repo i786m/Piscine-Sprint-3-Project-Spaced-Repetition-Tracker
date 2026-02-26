@@ -1,10 +1,10 @@
 #form-container {
 	margin-bottom: 2rem;
-	width: 100%;
 	display: flex;
 	justify-content: center;
-	display: flex;
-	justify-content: center;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
 	width: 100%;
 }
 
@@ -15,34 +15,27 @@ form#add-topic-form {
 	margin-top: 1.5rem;
 	align-items: flex-end;
 	width: 100%;
-	max-width: 900px;
-	justify-content: stretch;
+	justify-content: flex-start;
 }
 
 .form-group {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 0;
-	min-width: 250px;
+	min-width: 0;
 	max-width: 100%;
 	justify-content: stretch;
 }
 
-.form-group input {
+.form-group input,
+.form-group button {
 	width: 100%;
 	box-sizing: border-box;
-	min-width: 200px;
+	min-width: 0;
 	font-size: 1.1rem;
 	padding: 0.75rem 1rem;
 	height: 48px;
-}
-.form-group button {
-	width: 100%;
-	min-width: 80px;
-	max-width: 200px;
-	box-sizing: border-box;
-	height: 48px;
-	padding: 0;
+	flex: 1 1 0;
 }
 
 .form-group label {
@@ -153,22 +146,31 @@ table {
 	max-width: 900px;
 	margin-left: auto;
 	margin-right: auto;
-	border: 2px solid #2d6cdf;
-	border-radius: 8px;
+    border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 0 0 0.2px #2d6cdf;
+}
+thead,
+tbody {
+	overflow: hidden;
+	display: table;
+	width: 100%;
+	table-layout: fixed;
 }
 
 th,
 td {
 	padding: 0.75rem;
-	border-bottom: 1px solid #2d6cdf;
-	border-right: 1px solid #2d6cdf;
+	border: 1px solid #35425a;
 	text-align: center;
 }
 
 th {
 	background: #2d6cdf;
 	color: #fff;
-	border-top: 2px solid #2d6cdf;
+}
+tr {
+	border: 0px solid #2d6cdf;
 }
 
 tr:nth-child(even) td {
@@ -185,3 +187,4 @@ tr:nth-child(even) td {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
+
