@@ -25,8 +25,8 @@ function setupEventListeners() {
 	const userSelect = document.getElementById('user-select');
 	userSelect.addEventListener('change', handleUserChange);
 
-  const formContainer = document.getElementById('form-container');
-  formContainer.addEventListener('submit', handleAddTopic);
+	const formContainer = document.getElementById('form-container');
+	formContainer.addEventListener('submit', handleAddTopic);
 }
 
 function handleUserChange(event) {
@@ -84,18 +84,29 @@ function renderTopicsForm() {
 	const formContainer = document.getElementById('form-container');
 	const form = document.createElement('form');
 	form.id = 'add-topic-form';
+	const topicLabel = document.createElement('label');
+	topicLabel.htmlFor = 'topic-input';
+	topicLabel.textContent = 'Topic name:';
 	const input = document.createElement('input');
 	input.type = 'text';
+	input.id = 'topic-input';
 	input.placeholder = 'Enter topic name';
 	input.required = true;
+	input.autocomplete = 'off';
+	const dateLabel = document.createElement('label');
+	dateLabel.htmlFor = 'date-input';
+	dateLabel.textContent = 'Review start date:';
 	const dateInput = document.createElement('input');
 	dateInput.type = 'date';
+	dateInput.id = 'date-input';
 	dateInput.required = true;
 	dateInput.value = new Date().toISOString().split('T')[0];
 	const submitButton = document.createElement('button');
 	submitButton.type = 'submit';
 	submitButton.textContent = 'Add Topic';
+	form.appendChild(topicLabel);
 	form.appendChild(input);
+	form.appendChild(dateLabel);
 	form.appendChild(dateInput);
 	form.appendChild(submitButton);
 	formContainer.appendChild(form);
@@ -103,11 +114,11 @@ function renderTopicsForm() {
 
 function handleAddTopic(event) {
 	event.preventDefault();
-  const userId = state.selectedUser;
-  if (!userId) {
-    alert('Please select a user before adding a topic.');
-    return;
-  }
+	const userId = state.selectedUser;
+	if (!userId) {
+		alert('Please select a user before adding a topic.');
+		return;
+	}
 	const topicName = event.target[0].value;
 	const reviewStartDate = event.target[1].value;
 	const reviewDates = getReviewDates(reviewStartDate);
@@ -118,14 +129,14 @@ function handleAddTopic(event) {
 	addData(state.selectedUser, newTopics);
 	renderSchedule();
 	event.target.reset();
-  event.target[1].value = new Date().toISOString().split('T')[0];
+	event.target[1].value = new Date().toISOString().split('T')[0];
 }
 
 function setup() {
-  populateUserSelector();
-  setupEventListeners();
-  renderTopicsForm();
-  renderSchedule();
+	populateUserSelector();
+	setupEventListeners();
+	renderTopicsForm();
+	renderSchedule();
 }
 
 window.onload = setup;
