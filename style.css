@@ -55,7 +55,7 @@ select#user-select {
 }
 
 select#user-select:focus {
-	outline: 2px solid #2d6cdf;
+	outline: 2px solid #ffffff;
 	outline-offset: 2px;
 }
 
