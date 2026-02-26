@@ -129,12 +129,12 @@ function handleAddTopic(event) {
 		showNotification('Please select a user before adding a topic.', true);
 		return;
 	}
-	const topicName = event.target[0].value.trim();
+	const topicName = event.target['topic-input'].value.trim();
 	if (!topicName) {
 		showNotification('Please enter a topic name.', true);
 		return;
 	}
-	const reviewStartDate = event.target[1].value;
+	const reviewStartDate = event.target['date-input'].value;
 	const reviewDates = getReviewDates(reviewStartDate);
 	const newTopics = reviewDates.map((date) => ({
 		topic: topicName,
